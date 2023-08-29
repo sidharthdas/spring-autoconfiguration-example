@@ -8,7 +8,7 @@
    3. Then inside spring folder, create a file with name `org.springframework.boot.autoconfigure.AutoConfiguration.imports`
    4. Inside the file add the class which is annotated with @AutoConfiguration
       Example :
-      config.AppConfig
+      `config.AppConfig`
    5. There are other useful annotation such as @ConditionalOnClass and @ConditionalOnBean
         1. @ConditionalOnClass - This annotation is at class level. If the class is not present then the class with AutoConfiguration will not be created
            Example : `@ConditionalOnClass(name = "com.autoconfiguration.config.TestConfig")`
