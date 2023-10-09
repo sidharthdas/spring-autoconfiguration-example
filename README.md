@@ -1,5 +1,45 @@
 # spring-autoconfiguration-example
 
+The main difference between @Configuration and @AutoConfiguration is autoconfiguration is proxyBeanMethods = false, where as in configuration by default proxyBeanMethods = true.
+proxyBeanMethods = true :
+
+Suppose we have the below code:
+
+```
+@Bean
+public RestTemplate getRestTemplate() {
+      return new RestTemplate();
+}
+
+@Bean
+public A getA() {
+return new A(getRestTemplate());
+}
+@Bean
+public B getB() {
+return new B(getRestTemplate());
+}
+```
+in the above code, in a configuration class, we have 3 beans but beans a and b are calling getRestTemplate class, but with ``` proxyBeanMethods = true ``` the getRestTemplate method will get called only once and spring will keep the proxy.
+but if we use @AutoConfiguration or @Configutation(proxyBeanMethods = false), this code will give a compilation error, as we disabled the ``` proxyBeanMethods = false ```. To fix this we can have
+
+```
+@Bean
+public RestTemplate getRestTemplate() {
+      return new RestTemplate();
+}
+
+@Bean
+public A getA(RestTemplate restTemplate) {
+return new A(restTemplate);
+}
+@Bean
+public B getB(RestTemplate restTemplate) {
+return new B(restTemplate);
+}
+
+```
+
 1. Main use if we dont have to do the componentScan if we are using our module in other project.
 
    Steps:
