@@ -1,6 +1,7 @@
 # spring-autoconfiguration-example
 
 The main difference between @Configuration and @AutoConfiguration is autoconfiguration is proxyBeanMethods = false, whereas in configuration by default proxyBeanMethods = true. When proxyBeanMethods = true, it is a bit costly during startup, as it will create a proxyBean.
+Spring uses the Code Generation library (CGLIB) to generate the proxyBean of that class, so if we call the bean method, again and again, it will not create a new bean, instead, it will give you a proxy bean that spring has created
 proxyBeanMethods = true :
 
 Suppose we have the below code:
