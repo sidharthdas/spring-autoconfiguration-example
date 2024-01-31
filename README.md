@@ -1,9 +1,9 @@
 # spring-autoconfiguration-example
 
-The main difference between @Configuration and @AutoConfiguration is autoconfiguration is proxyBeanMethods = false, whereas in configuration by default proxyBeanMethods = true. When proxyBeanMethods = true, it is a bit costly during startup, as it will create a proxyBean.
+The main difference between @Configuration and @AutoConfiguration is in autoconfiguration proxyBeanMethods = false, whereas in configuration by default proxyBeanMethods = true. When proxyBeanMethods = true, it is a bit costly during startup, as it will create a proxyBean.
 
 
-Spring uses the Code Generation library (CGLIB) to generate the proxyBean of that class, so if we call the bean method, again and again, it will not create a new bean, instead, it will give you a proxy bean that spring has created.
+Spring uses the Code Generation library (CGLIB) to generate the proxyBean of that class, so if we call the bean method, again and again, it will not create a new bean, instead, it will give you a proxy bean that Spring has created.
 
 proxyBeanMethods = true :
 
@@ -44,23 +44,23 @@ return new B(restTemplate);
 
 ```
 
-1. Main use if we dont have to do the componentScan if we are using our module in other project.
+1. Main use if we don't have to use @ComponentScan if we are using our module in another project.
 
    Steps:
-   1. Create a folder in resources folder i.e. META-INF
+   1. Create a folder in the resources folder i.e. META-INF
    2. Inside META-INF, create another folder i.e. spring
-   3. Then inside spring folder, create a file with name `org.springframework.boot.autoconfigure.AutoConfiguration.imports`
+   3. Then inside the spring folder, create a file with the name `org.springframework.boot.autoconfigure.AutoConfiguration.imports`
    4. Inside the file add the class which is annotated with @AutoConfiguration
       Example :
       `config.AppConfig`
-   5. There are other useful annotation such as @ConditionalOnClass and @ConditionalOnBean
+   5. There are other useful annotations such as @ConditionalOnClass and @ConditionalOnBean
         1. @ConditionalOnClass - This annotation is at class level. If the class is not present then the class with AutoConfiguration will not be created
            Example : `@ConditionalOnClass(name = "com.autoconfiguration.config.TestConfig")`
-        3. @ConditionalOnBean - This annotation is at method level. If the bean is not present then the bean in AutoConfiguration class will not be created
+        3. @ConditionalOnBean - This annotation is at the method level. If the bean is not present then the bean in @AutoConfiguration class will not be created
            Example : `@ConditionalOnBean(name = "getStudent")`
 
 
-  Overal Example : 
+  Overall Example : 
 
   ```
   package config;
